@@ -12,7 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class BigEventType extends AbstractType
 {
@@ -28,9 +29,22 @@ class BigEventType extends AbstractType
         ->add('description', TextType::class, [
             'attr' => ['class' => 'form-control', 'style' => 'margin-bottom:15px']
         ])
-        // ->add('picture', TextType::class, [
-        //     'attr' => ['class' => 'form-control', 'style' => 'margin-bottom:15px']
-        // ])
+        ->add('picture', FileType::class, [
+            'label' => 'Upload Picture',
+            'mapped' => false,
+            'required' => false,
+            'constraints' => [
+                new File([
+                    'maxSize' => '5048k', // 14
+                    'mimeTypes' => [
+                        'image/png',
+                        'image/jpeg',
+                        'image/jpg',
+                    ],
+                    'mimeTypesMessage' => 'Please upload a valid image file',
+                ])
+            ],
+        ])
         ->add('capacity', NumberType::class, [
             'attr' => ['class' => 'form-control', 'style' => 'margin-bottom:15px']
         ])

@@ -7,9 +7,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 use App\Entity\BigEvents;
 use App\Form\BigEventType;
+use App\Service\FileUploader;
 
 class BigEventsController extends AbstractController
 {
@@ -24,7 +27,7 @@ class BigEventsController extends AbstractController
     }
 
     #[Route('/create', name: 'big_events_create')]
-    public function create(Request $request, ManagerRegistry $doctrine): Response
+    public function create(Request $request, ManagerRegistry $doctrine, FileUploader $fileUploader): Response
     {
         $event = new BigEvents();
         $form = $this->createForm(BigEventType::class, $event);
@@ -32,7 +35,13 @@ class BigEventsController extends AbstractController
         $form->handleRequest($request);
  
         if ($form->isSubmitted() && $form->isValid()) {
- 
+            
+            $pictureFile = $form->get('picture')->getData();
+            if ($pictureFile) {
+                $pictureFileName = $fileUploader->upload($pictureFile);
+                $event->setPicture($pictureFileName);
+              }
+
             $event = $form->getData(); 
             $em = $doctrine->getManager();
             $em->persist($event);
