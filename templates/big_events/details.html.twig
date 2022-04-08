@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="text-center mt-5">
+    <h1 class="text-center">Details about the event:</h1>
+</div>
+
+<div class="mt-5 d-flex justify-content-center">
+        <div class="card mb-3 w-50">
+        <img src="{{asset('pictures/' ~ event.picture )}}" class="card-img-top" alt="...">
+        <div class="card-body ms-5 mt-3">
+        <h5 class="card-title mb-3"><b>Name:</b> {{event.name}}</h5>
+        <p class="card-text"><b>Address: </b>{{event.address}}</p>
+        <p class="card-text"><b>Description: </b>{{event.description}}</p>
+        <p class="card-text"><b>Date and time: </b>{{event.datetime|date('F j, Y, g:i a')}}</p>
+        <p class="card-text"><b>Capacity: </b>{{event.capacity}}</p>
+        <p class="card-text"><b>Contact per mail: </b>{{event.email}}</p>
+        <p class="card-text"><b>Contact per phone: </b>{{event.phone}}</p>            
+        <p class="card-text"><b>Website: </b>{{event.url}}</p>
+        <p class="card-text"><b>Type: </b>{{event.type}}</p>
+    </div>
+    </div>
+</div>
+<div class="text-center mt-2">
+    <a href="/" class="btn btn-primary fs-3 mb-5">Back</a>
+</div>
+
+
+   {# <hr>
+   <h2 class="page-header">{{event.name}}</h2>
+   <ul class="list-group">
+       <li class="list-group-item">Category: {{event.name}}</li>
+       <li class="list-group-item">Priority: {{event.description}}</li>
+       <li class="list-group-item">Due: <strong> {{event.datetime|date('F j, Y, g:i a')}} </strong> </li>
+   </ul>
+   <p>
+       {{event.description}}
+   </p><br>
+   <a class="btn btn-info" href="/">Back</a> #}
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+{% for message in app.flashes('notice') %}
+   <div class="alert alert-success">
+    {{ message }}
+   </div>
+{% endfor %}
+
+<body class="bg-dark">
+{# hero begin #}
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner" style="height:700px">
+    <div class="carousel-item active">
+      <img src="../pictures/hero.png" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="../pictures/hero3.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="../pictures/hero2.jpg" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+{# hero end #}
+{# cards begin #}
+<div class="container mt-5 ">
+<div class="text-center">
+<p><a href="/create" class="btn btn-success fs-3 mb-4">Create event</a></p>
+</div>
+<div class="row row-cols-4">
+{% for bigevent in bigevents %}
+<div class="col">
+<div class="card mb-5" style="width: 18rem;">
+  <img src="{{asset('pictures/' ~ bigevent.picture )}}" class="card-img-top" alt="Ups..." style="height: 200px">
+  <div class="card-body">
+    <h5 class="card-title">{{bigevent.name}}</h5>
+    <p class="card-text">{{bigevent.description}}</p>
+    <a href="/details/{{bigevent.id}}" class="btn btn-success">View</a>
+    <a href="/edit/{{bigevent.id}}" class="btn btn-default">Edit</a>
+    <a href="/delete/{{bigevent.id}}" class="btn btn-danger">Delete</a>        
+  </div>
+</div>
+</div>
+{% endfor %}
+</div>
+</div>
+
+{# cards end  #}
+
+{% endblock %}
