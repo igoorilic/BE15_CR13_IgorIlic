@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container mt-5 ">
+<div class="text-center">
+<p><a href="/create" class="btn btn-success fs-3 mb-4">Create event</a></p>
+</div>
+<div class="text-center">
+<p><a href="/filter_music" class="btn btn-success fs-3 mb-4">Show music events</a></p>
+</div>
+<div class="row row-cols-lg-4 row-cols-md-8 row-cols-sm-12">
+{% for events in event %}
+<div class="col d-flex justify-content-around">
+<div class="card mb-5 " style="width: 18rem;">
+  <img src="{{asset('pictures/' ~ events.picture )}}" class="card-img-top" alt="Ups..." style="height: 200px">
+  <div class="card-body">
+    <h5 class="card-title">{{events.name}}</h5>
+    <p class="card-text">{{events.description}}</p>
+    <div class="d-flex justify-content-around">
+    <a href="/details/{{events.id}}" class="btn btn-primary">View</a>
+    <a href="/edit/{{events.id}}" class="btn btn-warning">Edit</a>
+    <a href="/delete/{{events.id}}" class="btn btn-danger">Delete</a>
+    </div>      
+  </div>
+</div>
+</div>
+{% endfor %}
+{% endblock %}
