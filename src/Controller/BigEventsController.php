@@ -106,6 +106,24 @@ class BigEventsController extends AbstractController
 
     }
 
+    #[Route('/filter_movie', name: 'filter_movie')]
+    public function findByMovie(ManagerRegistry $doctrine): Response
+    {
+        $type = $doctrine->getManager();
+        $event = $type->getRepository(BigEvents::class)->findBy(['type' => 'movie']);
+        return $this->render('big_events/movie.html.twig', ['event' => $event]);
+
+    }
+
+    #[Route('/filter_keynote', name: 'filter_keynote')]
+    public function findByKeynote(ManagerRegistry $doctrine): Response
+    {
+        $type = $doctrine->getManager();
+        $event = $type->getRepository(BigEvents::class)->findBy(['type' => 'keynote']);
+        return $this->render('big_events/keynote.html.twig', ['event' => $event]);
+
+    }
+
     #[Route('/delete/{id}', name: 'big_events_delete')]
     public function delete(ManagerRegistry $doctrine, $id){
           $em = $doctrine->getManager();

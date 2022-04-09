@@ -58,7 +58,7 @@ class BigEventType extends AbstractType
             'attr' => ['class' => 'form-control', 'style' => 'margin-bottom:15px']
         ])
           ->add('type', ChoiceType::class, [
-              'choices' => ['music' => 'Music', 'sport' => 'Sport', 'movie' => 'Movie', 'theater' => 'Theater'],
+              'choices' => ['music' => 'Music', 'sport' => 'Sport', 'movie' => 'Movie', 'keynote' => 'Keynote'],
               'attr' => ['class' => 'form-control', 'style' => 'margin-bottom:15px']
           ])
           ->add('url', TextType::class, [
